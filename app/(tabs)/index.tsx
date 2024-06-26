@@ -4,8 +4,13 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import * as ExpoProperties from 'expo-properties';
 
 export default function HomeScreen() {
+  ExpoProperties.setString('test_key', 'test_value');
+  ExpoProperties.setNumber('test_key_number', 123);
+  ExpoProperties.setBoolean('test_key_bool', true);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -16,18 +21,19 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">Welcome! </ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
+        <ThemedText type="subtitle">Properties</ThemedText>
         <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
+          String: {ExpoProperties.getString('test_key')}
+        </ThemedText>
+        <ThemedText>
+          Number: {ExpoProperties.getNumber('test_key_number')}
+        </ThemedText>
+        <ThemedText>
+          Boolean: {ExpoProperties.getBoolean('test_key_bool').toString()}
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
